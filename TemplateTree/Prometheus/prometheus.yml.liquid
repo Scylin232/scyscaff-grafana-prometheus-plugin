@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+{{~ for compose_service in compose_services ~}}
+  {{~ if compose_service.type == "Framework" ~}}
+
+  - job_name: '{{ compose_service.container_name }}'
+    static_configs:
+    {{~ for port in compose_service.ports ~}}
+      - targets: ["{{ compose_service.container_name }}:{{ port.key }}"]
+
+    {{~ end ~}}
+  {{~ end ~}}
+{{~ end ~}}
