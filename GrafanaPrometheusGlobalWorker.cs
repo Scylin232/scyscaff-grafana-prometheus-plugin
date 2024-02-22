@@ -27,7 +27,7 @@ public class GrafanaPrometheusGlobalWorker : IGlobalWorkerPlugin, IDockerCompati
             },
             Volumes = new Dictionary<string, string>
             {
-                { "./prometheus", "/etc/prometheus" },
+                { $"./{projectName}.Global/Prometheus", "/etc/prometheus" },
                 { "prometheus-data", "/prometheus" }
             }
         };
