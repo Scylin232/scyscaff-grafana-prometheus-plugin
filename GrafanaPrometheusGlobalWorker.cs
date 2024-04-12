@@ -6,7 +6,7 @@ using ScyScaff.Docker.Models.Plugins;
 
 namespace ScyScaffPlugin.GrafanaPrometheusGlobalWorker;
 
-public class GrafanaPrometheusGlobalWorker : IGlobalWorkerPlugin, IDockerCompatible
+public class GrafanaPrometheusGlobalWorker : IGlobalWorkerTemplatePlugin, IDockerCompatible
 {
     public string GlobalWorkerName { get; } = "grafana-prometheus";
 
