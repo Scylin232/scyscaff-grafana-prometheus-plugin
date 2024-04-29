@@ -8,6 +8,7 @@ scrape_configs:
       - targets: ["prometheus:9090"]
 {{~ for compose_service in compose_services ~}}
   {{~ if compose_service.type == "Framework" ~}}
+  {{~ if compose_service.linked_entity.flags["Metrics"] == "prometheus" ~}}
 
   - job_name: '{{ compose_service.container_name }}'
     static_configs:
@@ -15,5 +16,6 @@ scrape_configs:
       - targets: ["{{ compose_service.container_name }}:{{ port.key }}"]
 
     {{~ end ~}}
+  {{~ end ~}}
   {{~ end ~}}
 {{~ end ~}}
